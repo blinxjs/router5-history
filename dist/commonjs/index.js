@@ -57,6 +57,11 @@ var historyPlugin = function historyPlugin() {
                 // If current state is already the default route, we will have a double entry
                 // Navigating back and forth will emit SAME_STATES error
                 defaultRoute && router.navigate(defaultRoute, defaultParams, { forceDeactivate: forceDeactivate, reload: true, replace: true });
+                if(!defaultRoute){
+                    var err = { code: "ROUTE_NOT_FOUND" };
+                    router._invokeListeners('$$error', null, router.lastKnownState, err);
+                    router.lastKnownState = undefined;
+                }
                 return;
             }
             if (router.lastKnownState && router.areStatesEqual(state, router.lastKnownState, false)) {
