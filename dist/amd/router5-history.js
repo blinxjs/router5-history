@@ -39,7 +39,7 @@ define('router5HistoryPlugin', function () { 'use strict';
      * Browser functions needed by router5
      */
     var getBase$1 = function getBase() {
-        return window.location.pathname.replace(/\/$/, '');
+        return (window.location.pathname + window.location.pathname + window.location.search).replace(/\/$/, '');
     };
 
     var pushState$1 = function pushState(state, title, path) {
